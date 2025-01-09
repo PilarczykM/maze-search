@@ -16,6 +16,7 @@ jobs:
               run: pdm install
     Linting:
         runs-on: ubuntu-latest
+        needs: Checkout
         steps:
             - name: PDM - lint
               run: pdm run lint-fix
