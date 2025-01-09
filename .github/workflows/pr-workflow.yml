@@ -1,0 +1,19 @@
+name: "Pull request workflow - CI verification"
+
+on:
+    pull_request:
+        branches: ["main"]
+
+jobs:
+    Validation:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+            - name: Setup PDM
+              uses: pdm-project/setup-pdm@v4
+            - name: Install dependencies
+              run: pdm install
+            - name: PDM - lint
+              run: pdm run lint-fix
+    
