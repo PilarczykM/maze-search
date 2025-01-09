@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from src.node import Node, State
+from node import Node, State
 
 
 class EmptyFrontierError(Exception):
@@ -26,7 +26,6 @@ class Frontier(ABC):
         """
         self._frontier: list[Node] = []
 
-    @abstractmethod
     def add(self, node: Node) -> None:
         """Add a node to the frontier.
 
@@ -37,8 +36,7 @@ class Frontier(ABC):
         """
         self._frontier.append(node)
 
-    @abstractmethod
-    def is_empty(self, state: State) -> bool:
+    def is_empty(self) -> bool:
         """Check if the frontier is empty.
 
         Returns
@@ -48,7 +46,6 @@ class Frontier(ABC):
         """
         return len(self._frontier) == 0
 
-    @abstractmethod
     def contains_state(self, state: State) -> bool:
         """Check if a state is in the frontier.
 
@@ -84,6 +81,9 @@ class Frontier(ABC):
 class StackFrontier(Frontier):
     """Stack frontier implementation representing a frontier in a search algorithm."""
 
+    # def __init__(self):
+    #     super().__init__()
+
     def remove(self) -> Node:
         """Stack remove implementation.
 
@@ -97,7 +97,7 @@ class StackFrontier(Frontier):
         EmptyFrontierError
             If the frontier is empty when trying to remove a node.
         """
-        if self.empty():
+        if self.is_empty():
             raise EmptyFrontierError()
 
         node = self._frontier[-1]
@@ -121,7 +121,7 @@ class QueueFrontier(Frontier):
         EmptyFrontierError
             If the frontier is empty when trying to remove a node.
         """
-        if self.empty():
+        if self.is_empty():
             raise EmptyFrontierError()
 
         node = self._frontier[0]
