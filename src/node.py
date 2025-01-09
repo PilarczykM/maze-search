@@ -1,7 +1,7 @@
 from typing import Optional
 
 State = tuple[int, int]
-Action = tuple[str, tuple[int, int]]
+Action = str
 
 
 class Node:
@@ -11,7 +11,7 @@ class Node:
     and a reference to its parent node.
     """
 
-    def __init__(self, state: State, parent: Optional["Node"], action: Action) -> None:
+    def __init__(self, state: State, parent: Optional["Node"], action: Optional[Action]) -> None:
         """Initialize a Node instance.
 
         Parameters
