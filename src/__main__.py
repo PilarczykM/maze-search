@@ -1,4 +1,5 @@
-def main():
+def main() -> None:
+    """Bootstrap the maze."""
     print("Maze app")
 
 
