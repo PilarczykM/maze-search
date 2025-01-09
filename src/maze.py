@@ -2,7 +2,7 @@ from pathlib import Path
 from typing import Optional
 
 import PIL.Image
-from PIL.ImageDraw import ImageDraw
+import PIL.ImageDraw
 
 from frontier import Frontier, State
 from node import Node
@@ -181,7 +181,8 @@ class Maze:
                     child = Node(state=state, parent=node, action=action)
                     frontier.add(child)
 
-    def output_image(self, filename: Path, show_solution: bool=True, show_explored: bool=False):
+    def output_image(self, filename: Path, show_solution: bool = True, show_explored: bool = False) -> None:  # noqa: FBT001, FBT002
+        """Generate image based on maze."""
         cell_size = 50
         cell_border = 2
 
@@ -192,7 +193,7 @@ class Maze:
         img = PIL.Image.new(
             "RGBA",
             (self._width * cell_size, self._height * cell_size),
-            "black"
+            "black",
         )
         draw = PIL.ImageDraw.Draw(img)
 
@@ -228,7 +229,7 @@ class Maze:
                 draw.rectangle(
                     ([(j * cell_size + cell_border, i * cell_size + cell_border),
                       ((j + 1) * cell_size - cell_border, (i + 1) * cell_size - cell_border)]),
-                    fill=fill
+                    fill=fill,
                 )
 
         img.save(filename)
